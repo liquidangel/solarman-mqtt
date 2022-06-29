@@ -111,6 +111,8 @@ def single_run(file):
             inverter_data["deviceState"],
         )
         Mqtt(config["mqtt"], topic + "/logger/deviceState", logger_data["deviceState"])
+        inverter_data_list["Total_Grid_Power"] = "0"
+        Mqtt(config["mqtt"], topic + "/inverter/attributes", json.dumps(inverter_data_list))
         logging.info(
             "%s - Inverter DeviceState: %s"
             "-> Only status MQTT publish (probably offline due to nighttime shutdown)",
